@@ -290,21 +290,41 @@ h2 {
 
 .record-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 16px;
   padding: 12px 28px;
   background: #4fb9af;
   font-size: 18px;
   font-weight: bold;
   color: #000;
   border-bottom: 1px solid #333;
+  align-items: start;
 }
 
 .record-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 16px;
   padding: 14px 28px;
   background: cornsilk;
   border-bottom: 1px solid #2a2a2a;
+  align-items: start;
+}
+
+.record-header > div,
+.record-row > div {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 499px) {
+  .record-header,
+  .record-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 14px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 .record-row:last-child {

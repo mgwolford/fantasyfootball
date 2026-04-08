@@ -16,15 +16,15 @@ const records = [
   {
     id: 3,
     title: "Closest Game",
-    value: "0.21 points",
-    holder: "Matt over Daniel",
-    year: 2025,
+    value: "0.15 points",
+    holder: "Matt over Greg",
+    year: 2023,
   },
   {
     id: 4,
     title: "Biggest Blowout",
-    value: "119.62 points",
-    holder: "Jesse over Alex",
+    value: "151.08 points",
+    holder: "Daniel over Jesse",
     year: 2025,
   },
 ];
