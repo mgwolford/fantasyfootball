@@ -1,0 +1,10 @@
+# Dependencies — commit package-lock.json instead; reinstall with npm ci
+node_modules
+
+# Local env
+.env
+.env.*.local
+
+# Logs / OS
+*.log
+.DS_Store

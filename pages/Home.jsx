@@ -1,10 +1,10 @@
-import Header from "../componets/Header.jsx";
-import DraftCoundown from "../componets/DraftCoundown.jsx";
-import DraftOrder from "../componets/DraftOrder.jsx";
-import Managers from "../componets/Managers.jsx";
-import Keepers from "../componets/Keepers.jsx";
-import RecordPreview from "../componets/RecordPreview.jsx";
-import Footer from "../componets/Footer.jsx";
+import Header from "../components/Header.jsx";
+import DraftCoundown from "../components/DraftCoundown.jsx";
+import DraftOrder from "../components/DraftOrder.jsx";
+import Managers from "../components/Managers.jsx";
+import Keepers from "../components/Keepers.jsx";
+import RecordPreview from "../components/RecordPreview.jsx";
+import Footer from "../components/Footer.jsx";
 
 
 function Home() {
