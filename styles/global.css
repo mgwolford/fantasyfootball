@@ -3,7 +3,7 @@
 
 
 body {
-  background-image: url("../dist/assets/field.png");
+  background-image: url("../assets/field.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
