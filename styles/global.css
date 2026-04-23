@@ -238,6 +238,7 @@ h2 {
   width: 100%;
   @media (min-width: 600px) {
     padding: 0 20px;
+    max-width: 700px;
   }
 }
 
@@ -312,6 +313,7 @@ h2 {
   width: 100%;
   @media (min-width: 600px) {
     padding: 0 20px;
+    max-width: 700px;
   }
 }
 
@@ -367,6 +369,7 @@ h2 {
   width: 100%;
   @media (min-width: 600px) {
     padding: 0 20px;
+    max-width: 700px;
   }
 }
 
