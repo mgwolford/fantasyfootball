@@ -1,8 +1,20 @@
-import Home from "./pages/Home.jsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import ManagerHistory from "./pages/ManagerHistory";
 import "./styles/global.css";
 
 function App() {
-  return <Home />;
+  return (
+    <BrowserRouter>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/manager-history" element={<ManagerHistory />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
