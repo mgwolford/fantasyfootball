@@ -4,7 +4,7 @@ A custom-built web application for tracking league history, draft details, and k
 
 ## Site
 
-Visit site: [mgwolford.github.io/fantasyfootball](https://mgwolford.github.io/fantasyfootball/)
+Visit site: <a href="https://mgwolford.github.io/fantasyfootball/" target="_blank" rel="noopener noreferrer">mgwolford.github.io/fantasyfootball</a>
 
 ## Overview
 
