@@ -9,6 +9,7 @@ function Navbar() {
         <div className="site-nav-links">
           <Link to="/">Home</Link>
           <Link to="/manager-history">Manager History</Link>
+          <Link to="/records">Records</Link>
         </div>
       </div>
     </nav>
