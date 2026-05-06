@@ -10,6 +10,7 @@ function Navbar() {
           <Link to="/">Home</Link>
           <Link to="/manager-history">Manager History</Link>
           <Link to="/records">Records</Link>
+          <Link to="/headtohead">Head-to-Head</Link>
         </div>
       </div>
     </nav>

@@ -1,13 +1,13 @@
 function DraftOrder() {
   const draftOrder = [
-    { pick: 1, name: "TBD" },
-    { pick: 2, name: "TBD" },
-    { pick: 3, name: "TBD" },
-    { pick: 4, name: "TBD" },
-    { pick: 5, name: "TBD" },
-    { pick: 6, name: "TBD" },
-    { pick: 7, name: "TBD" },
-    { pick: 8, name: "TBD" },
+    { pick: 1, name: "Matt" },
+    { pick: 2, name: "Mike" },
+    { pick: 3, name: "Sejla" },
+    { pick: 4, name: "Erich" },
+    { pick: 5, name: "Greg" },
+    { pick: 6, name: "Jesse" },
+    { pick: 7, name: "Alex" },
+    { pick: 8, name: "Daniel" },
   ];
 
   return (

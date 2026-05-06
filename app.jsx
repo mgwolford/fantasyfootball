@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import ManagerHistory from "./pages/ManagerHistory";
 import Records from "./pages/Records";
+import HeadtoHead from "./pages/HeadtoHead";
 import "./styles/global.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/manager-history" element={<ManagerHistory />} />
         <Route path="/records" element={<Records />} />
+        <Route path="/headtohead" element={<HeadtoHead />} />
       </Routes>
     </BrowserRouter>
   );
