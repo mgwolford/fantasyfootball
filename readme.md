@@ -1,95 +1,134 @@
-# Fantasy Football League Hub
+# Fantasy Football Site
 
-A custom-built web application for tracking league history, draft details, and key statistics for a fantasy football league.
+A React-based fantasy football website built to track league history, manager records, and long-term statistics in a clean and organized interface. The project focuses on dynamic data rendering, reusable React components, and scalable page structure for expanding league history and records over time.
 
 ## Site
 
 Visit site: <a href="https://mgwolford.github.io/fantasyfootball/" target="_blank" rel="noopener noreferrer">mgwolford.github.io/fantasyfootball</a>
 
-## Overview
+---
 
-This site serves as a central hub for league information, combining draft details, historical records, and manager performance into a structured and accessible interface.
+# Features
 
-The project is built using React, with a focus on reusable components, organized data handling, and responsive design.
+- React-based front-end application
+- Dynamic rendering using reusable components
+- Draft countdown clock for league events
+- Manager profile pages with season-by-season stats
+- League records page
+- Head-to-head matchup history page
+- Responsive layout and modern UI structure
+- Expandable architecture for future features
 
-## Current Features
+---
 
-### Homepage
+# Pages
 
-The main landing page includes the following sections:
+## Home Page
 
-* **Header / Intro**
+The home page serves as the main hub of the site and introduces the fantasy football league.
 
-  * Overview of the league and purpose of the site
+### Features:
+- League welcome/header section
+- Draft countdown clock
+- Draft order display
+- Quick previews for managers, records, and keepers
+- Navigation to all major pages
 
-* **Draft Countdown**
+### Main Files:
+- `Home.jsx`
+- `Home.css`
 
-  * Live countdown timer to draft day
-  * Updates in real time
+---
 
-* **Draft Order**
+## Managers Page
 
-  * Responsive draft order layout
-  * Mobile-friendly stacked view
-  * Desktop grid view
+The managers section displays all fantasy football owners and their league history.
 
-* **Managers**
+### Features:
+- Overall records
+- Championships
+- Playoff appearances
+- Manager cards or row layouts
+- Links to detailed manager pages
 
-  * All-time records for each manager
-  * Includes championships, overall record, and playoff appearances
+### Main Files:
+- `Managers.jsx`
+- `Managers.css`
+- `managers.js`
 
-* **Keepers**
+---
 
-  * Current season keeper selections (two per manager)
+## Individual Manager Pages
 
-* **Record Preview**
+Each manager has their own detailed profile page showing season-by-season performance.
 
-  * Snapshot of key league records, including:
+### Features:
+- Yearly records
+- Best score
+- Lowest score
+- Playoff appearances
+- Historical stats tables
 
-    * Highest score
-    * Lowest score
-    * Closest game
-    * Biggest blowout
+### Main Files:
+- `ManagerPage.jsx`
+- `ManagerSeasonBox.jsx`
+- `managerData.js`
 
-## Tech Stack
+---
 
-* React (component-based architecture)
-* JavaScript (ES6+)
-* HTML5
-* CSS3 (custom styling and responsive design)
+## Records Page
 
-## Project Structure
+The records page displays league-wide top performances and historical statistics.
 
-```
-src/
-├── components/
-├── data/
-├── pages/
-├── styles/
-├── App.jsx
-└── main.jsx
-```
+### Features:
+- Highest scores
+- Lowest scores
+- Biggest blowouts
+- Closest games
+- Most points scored
+- Most points against
+- Playoff records
 
-The application is structured to separate:
+### Main Files:
+- `Records.jsx`
+- `Records.css`
+- `recordsData.js`
 
-* Data (league statistics and records)
-* Components (reusable UI elements)
-* Pages (layout and structure)
-* Styles (global and section-specific styling)
+---
 
-## Development Focus
+## Head-to-Head Page
 
-This project emphasizes:
+The head-to-head page tracks each manager’s record against every other manager in league history.
 
-* Component reusability
-* Mapping structured data into UI components
-* Responsive, mobile-first design
-* Practical application of core React concepts
+### Features:
+- Win-loss records versus each manager
+- Winning percentages
+- Total games played
+- Organized comparison tables
 
-## Coming Soon
+### Example:
+| Opponent | Record | Win % | Games Played |
+|----------|--------|--------|---------------|
+| Alex | 7-4 | .636 | 11 |
+| Mike | 7-4 | .636 | 11 |
+| Greg | 3-7 | .300 | 10 |
 
-Planned features include:
+### Main Files:
+- `HeadToHead.jsx`
+- `headToHead.js`
 
-* Full records page with expanded stat categories
-* Manager profile pages with detailed history
-* Playoff statistics and performance tracking
+---
+
+# Countdown Clock
+
+One of the main interactive features of the site is the live draft countdown clock.
+
+### Features:
+- Real-time countdown updates
+- Tracks time until the fantasy football draft
+- Built using React state and effects
+
+### Main Files:
+- `DraftCountdown.jsx`
+
+---
