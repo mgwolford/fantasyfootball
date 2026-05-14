@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import RecordsPage from "../components/RecordsPage";
-import BackToTop from "../components/BackToTop";
-import "../styles/global.css";
+import RecordsPage from "../components/Records/RecordsPage";
+import BackToTop from "../components/Layout/BackToTop";
 import trophyImg from "../assets/trophy.png";
+import "../styles/global.css";
 
 const recordSections = [
   { id: "best-regular-season-records", title: "Best Regular Season Records" },

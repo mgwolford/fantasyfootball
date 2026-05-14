@@ -1,4 +1,4 @@
-import managers from "../data/managers";
+import managers from "../../data/managers";
 import ManagerCard from "./ManagerCard";
 import { Link } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import keepers from "../data/keepers";
+import keepers from "../../data/keepers";
 import KeeperCard from "./KeeperCard";
 
 function Keepers() {

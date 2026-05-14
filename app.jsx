@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
+import Navbar from "./components/Layout/Navbar";
+import Home from "./pages/Home";  // TODO: Add other pages here
 import ManagerHistory from "./pages/ManagerHistory";
-import Records from "./pages/Records";
-import HeadtoHead from "./pages/HeadtoHead";
-import "./styles/global.css";
+import Records from "./pages/Records";  // TODO: Add other pages here
+import HeadtoHead from "./pages/HeadtoHead";  // TODO: Add other pages here
+import "./styles/global.css";  // TODO: Add other styles here
 
 function App() {
   return (

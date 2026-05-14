@@ -1,4 +1,4 @@
-import helmetImg from "../assets/helmet.png";
+import helmetImg from "../../assets/helmet.png";
 
 function Header() {
   return (

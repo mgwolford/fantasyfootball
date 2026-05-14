@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import managerHistory from "../data/managerHistory";
-import ManagerSeasonBox from "../components/ManagerSeasonBox";
-import BackToTop from "../components/BackToTop";
+import ManagerSeasonBox from "../components/Managers/ManagerSeasonBox";
+import BackToTop from "../components/Layout/BackToTop";
 import coachImg from "../assets/coach.png";
 
 function createManagerAnchorId(name) {

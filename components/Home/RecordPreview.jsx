@@ -1,4 +1,4 @@
-import records from "../data/records";
+import records from "../../data/records";
 import RecordCard from "./RecordCard";
 import { Link } from "react-router-dom";
 

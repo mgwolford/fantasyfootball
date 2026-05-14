@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import HeadtoHeadTable from "../components/HeadtoHeadTable";
+import HeadtoHeadTable from "../components/HeadtoHead/HeadtoHeadTable";
 import { headToHead } from "../data/headtoHead";
-import BackToTop from "../components/BackToTop";
+import BackToTop from "../components/Layout/BackToTop";
 import faceoffImg from "../assets/faceoff.png";
 import "../styles/global.css";
 
