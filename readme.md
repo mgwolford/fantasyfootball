@@ -4,7 +4,7 @@ A React-based fantasy football website built to track league history, manager re
 
 ## Site
 
-Visit site: <a href="https://mgwolford.github.io/fantasyfootball/" target="_blank" rel="noopener noreferrer">mgwolford.github.io/fantasyfootball</a>
+Visit site: <a href="https://mgwolford.github.io/swftleague/" target="_blank" rel="noopener noreferrer">mgwolford.github.io/swftleague</a>
 
 ---
 
