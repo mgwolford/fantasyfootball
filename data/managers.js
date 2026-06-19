@@ -4,57 +4,73 @@ const managers = [
     manager: "Alex",
     championships: 3,
     playoffAppearances: 4,
-    overallRecord: "51-27"
+    overallRecord: "51-27",
+    active: true,
   },
   {
     id: 2,
     manager: "Daniel",
     championships: 2,
     playoffAppearances: 3,
-    overallRecord: "45-33"
+    overallRecord: "45-33",
+    active: true,
   },
   {
     id: 3,
     manager: "Mike",
     championships: 0,
     playoffAppearances: 2,
-    overallRecord: "40-38"
+    overallRecord: "40-38",
+    active: true,
   },
   {
     id: 4,
     manager: "Jesse",
     championships: 0,
     playoffAppearances: 3,
-    overallRecord: "39-39"
+    overallRecord: "39-39",
+    active: true,
   },
   {
     id: 5,
     manager: "Greg",
     championships: 0,
     playoffAppearances: 1,
-    overallRecord: "38-40"
+    overallRecord: "38-40",
+    active: true,
   },
   {
     id: 6,
     manager: "Matt",
     championships: 0,
     playoffAppearances: 1,
-    overallRecord: "36-42"
+    overallRecord: "36-42",
+    active: true,
   },
   {
     id: 7,
     manager: "Erich",
     championships: 1,
     playoffAppearances: 1,
-    overallRecord: "32-46"
+    overallRecord: "32-46",
+    active: true,
   },
   {
     id: 8,
     manager: "Josh",
     championships: 0,
     playoffAppearances: 2,
-    overallRecord: "32-46"
+    overallRecord: "32-46",
+    active: false,
   },
+  {
+    id: 9,
+    manager: "Sejla",
+    championships: 0,
+    playoffAppearances: 0,
+    overallRecord: "0-0",
+    active: true,
+  }
 ];
 
 export default managers;

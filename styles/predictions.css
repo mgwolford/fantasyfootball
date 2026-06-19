@@ -1,0 +1,132 @@
+.predictions-page {
+    padding: 2rem 1rem;
+    color: #fff;
+  }
+  
+  .predictions-hero {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    text-align: center;
+  }
+  
+  .predictions-hero h1 {
+    margin-bottom: 0.75rem;
+    font-size: 2.3rem;
+    color: gold;
+  }
+  
+  .predictions-hero p {
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  
+  .lock-note {
+    margin-top: 1rem;
+    font-weight: 700;
+    color: #f7c948;
+  }
+  
+  .predictions-form {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .prediction-card {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.55);
+  }
+  
+  .prediction-card h2 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: gold;
+  }
+  
+  .prediction-card h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+    color: #3CB371
+  }
+  
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-weight: 700;
+  }
+  
+  select,
+  input {
+    width: 95%;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .team-grid,
+  .division-grid,
+  .conference-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .team-pick {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.9rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  .team-pick div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  
+  .team-pick span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+  
+  .submit-predictions {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    background: #f7c948;
+    color: #111;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  
+  .submit-predictions:hover {
+    background: #ffd95c;
+  }
+  
+  @media (min-width: 700px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .division-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .conference-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1000px) {
+    .team-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
