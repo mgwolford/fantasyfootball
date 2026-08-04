@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function DraftCountdown() {
-  const draftDate = new Date("2026-08-31T18:00:00");
+  const draftDate = new Date("2026-08-30T18:00:00");
 
   const calculateTimeLeft = () => {
     const now = new Date();
@@ -75,7 +75,7 @@ function DraftCountdown() {
         <p>Draft Day is here.</p>
       )}
 
-      <p className="draft-date-text">Draft Date: August 31, 2026 at 6:00 PM</p>
+      <p className="draft-date-text">Draft Date: August 30, 2026 at 6:00 PM</p>
     </section>
   );
 }
