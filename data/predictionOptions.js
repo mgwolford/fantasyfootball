@@ -11,10 +11,10 @@ export const divisions = [
   
   export const awardCategories = [
     "MVP",
+    "Coach of the Year",
     "Offensive Player of the Year",
     "Defensive Player of the Year",
     "Offensive Rookie of the Year",
-    "Defensive Rookie of the Year",
-    "Coach of the Year",
+    "Defensive Rookie of the Year",    
     "First Coach Fired"
   ];

@@ -3,8 +3,8 @@ const keepers = [
       id: 1,
       managerId: 1,
       manager: "Alex",
-      keeperOne: "Justin Jefferson",
-      keeperTwo: "Brian Thomas"
+      keeperOne: "Jahymr Gibbs",
+      keeperTwo: "Jayden '5' Daniels"
     },
     {
       id: 2,
@@ -17,7 +17,7 @@ const keepers = [
       id: 3,
       managerId: 3,
       manager: "Mike",
-      keeperOne: "Tyreek Hill",
+      keeperOne: "Christian McCaffrey",
       keeperTwo: "Lamar Jackson"
     },
     {
@@ -31,7 +31,7 @@ const keepers = [
       id: 5,
       managerId: 5,
       manager: "Greg",
-      keeperOne: "Patrick Mahomes",
+      keeperOne: "CeeDee Lamb",
       keeperTwo: "Da'Von Achane",
     },
     {
@@ -49,9 +49,9 @@ const keepers = [
       keeperTwo: "Malik Nabers",
     },
     {
-      id: 8,
-      managerId: 8,
-      manager: "Josh",
+      id: 9,
+      managerId: 9,
+      manager: "Sejla",
       keeperOne: "Derrick Henry",
       keeperTwo: "A.J. Brown",
     },

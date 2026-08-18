@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/predictions.css";
 
 import managers from "../data/managers";
-import { nflTeams } from "../data/NFLTeams";
+import { nflTeams, winTotalsSource } from "../data/NFLTeams";
 import { divisions, awardCategories } from "../data/predictionOptions";
 
 function Predictions() {
@@ -10,6 +10,11 @@ function Predictions() {
   const isLocked = new Date() > lockDate;
 
   const activeManagers = managers.filter((manager) => manager.active !== false);
+  const submissionEndpoint = import.meta.env.VITE_PREDICTIONS_ENDPOINT;
+  const afcTeams = nflTeams.filter((team) => team.division.startsWith("AFC"));
+  const nfcTeams = nflTeams.filter((team) => team.division.startsWith("NFC"));
+  const [submissionStatus, setSubmissionStatus] = useState("idle");
+  const [submissionMessage, setSubmissionMessage] = useState("");
 
   const [formData, setFormData] = useState({
     manager: "",
@@ -45,11 +50,70 @@ function Predictions() {
     });
   }
 
-  function handleSubmit(e) {
+  function renderTeamOptions(teams) {
+    return teams.map((team) => (
+      <option key={team.name} value={team.name}>{team.name}</option>
+    ));
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("Prediction submission:", formData);
-    alert("Predictions submitted. Google Sheets connection will be added next.");
+    if (new Set(formData.afcWildCards).size !== 3) {
+      setSubmissionStatus("error");
+      setSubmissionMessage("Choose three different AFC Wild Card teams.");
+      return;
+    }
+
+    if (new Set(formData.nfcWildCards).size !== 3) {
+      setSubmissionStatus("error");
+      setSubmissionMessage("Choose three different NFC Wild Card teams.");
+      return;
+    }
+
+    if (![formData.afcChampion, formData.nfcChampion].includes(formData.superBowlWinner)) {
+      setSubmissionStatus("error");
+      setSubmissionMessage("The Super Bowl winner must be one of your conference champions.");
+      return;
+    }
+
+    if (!submissionEndpoint) {
+      setSubmissionStatus("error");
+      setSubmissionMessage("Submission is not connected yet. Add the Google Sheets URL to VITE_PREDICTIONS_ENDPOINT.");
+      return;
+    }
+
+    setSubmissionStatus("submitting");
+    setSubmissionMessage("");
+
+    try {
+      const response = await fetch(submissionEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          ...formData,
+          season: 2026,
+          winTotals: Object.fromEntries(
+            nflTeams.map((team) => [team.name, {
+              line: team.winTotal,
+              pick: formData.winTotals[team.name],
+            }])
+          ),
+        }),
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "The submission could not be saved.");
+      }
+
+      setSubmissionStatus("success");
+      setSubmissionMessage("Your predictions have been saved. Good luck this season!");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      setSubmissionStatus("error");
+      setSubmissionMessage(error.message || "Something went wrong. Please try again.");
+    }
   }
 
   if (isLocked) {
@@ -72,6 +136,9 @@ function Predictions() {
           Pick your NFL season predictions before the deadline. Predictions lock
           on September 9 at 5:00 PM ET.
         </p>
+        {submissionStatus === "success" && (
+          <p className="submission-message success" role="status">{submissionMessage}</p>
+        )}
       </section>
 
       <form className="predictions-form" onSubmit={handleSubmit}>
@@ -100,6 +167,9 @@ function Predictions() {
 
         <section className="prediction-card">
           <h2>Over / Under Win Totals</h2>
+          <p className="odds-source">
+            Win-total information from {winTotalsSource.sportsbook} is accurate as of {winTotalsSource.updated}.
+          </p>
 
           <div className="team-grid">
             {nflTeams.map((team) => (
@@ -168,15 +238,16 @@ function Predictions() {
               {[0, 1, 2].map((index) => (
                 <label key={`afc-wild-card-${index}`}>
                   Wild Card {index + 1}
-                  <input
-                    type="text"
-                    placeholder="Enter team name"
+                  <select
                     value={formData.afcWildCards[index]}
                     onChange={(e) =>
                       updateWildCard("afcWildCards", index, e.target.value)
                     }
                     required
-                  />
+                  >
+                    <option value="">Choose team</option>
+                    {renderTeamOptions(afcTeams)}
+                  </select>
                 </label>
               ))}
             </div>
@@ -187,15 +258,16 @@ function Predictions() {
               {[0, 1, 2].map((index) => (
                 <label key={`nfc-wild-card-${index}`}>
                   Wild Card {index + 1}
-                  <input
-                    type="text"
-                    placeholder="Enter team name"
+                  <select
                     value={formData.nfcWildCards[index]}
                     onChange={(e) =>
                       updateWildCard("nfcWildCards", index, e.target.value)
                     }
                     required
-                  />
+                  >
+                    <option value="">Choose team</option>
+                    {renderTeamOptions(nfcTeams)}
+                  </select>
                 </label>
               ))}
             </div>
@@ -208,35 +280,35 @@ function Predictions() {
           <div className="division-grid">
             <label>
               AFC Champion
-              <input
-                type="text"
-                placeholder="Enter team name"
+              <select
                 value={formData.afcChampion}
                 onChange={(e) =>
                   setFormData({ ...formData, afcChampion: e.target.value })
                 }
                 required
-              />
+              >
+                <option value="">Choose team</option>
+                {renderTeamOptions(afcTeams)}
+              </select>
             </label>
 
             <label>
               NFC Champion
-              <input
-                type="text"
-                placeholder="Enter team name"
+              <select
                 value={formData.nfcChampion}
                 onChange={(e) =>
                   setFormData({ ...formData, nfcChampion: e.target.value })
                 }
                 required
-              />
+              >
+                <option value="">Choose team</option>
+                {renderTeamOptions(nfcTeams)}
+              </select>
             </label>
 
             <label>
               Super Bowl Winner
-              <input
-                type="text"
-                placeholder="Enter team name"
+              <select
                 value={formData.superBowlWinner}
                 onChange={(e) =>
                   setFormData({
@@ -245,7 +317,12 @@ function Predictions() {
                   })
                 }
                 required
-              />
+              >
+                <option value="">Choose champion</option>
+                {[formData.afcChampion, formData.nfcChampion]
+                  .filter(Boolean)
+                  .map((team) => <option key={team} value={team}>{team}</option>)}
+              </select>
             </label>
           </div>
         </section>
@@ -271,8 +348,16 @@ function Predictions() {
           </div>
         </section>
 
-        <button className="submit-predictions" type="submit">
-          Submit Predictions
+        {submissionStatus === "error" && (
+          <p className="submission-message error" role="alert">{submissionMessage}</p>
+        )}
+
+        <button
+          className="submit-predictions"
+          type="submit"
+          disabled={submissionStatus === "submitting" || submissionStatus === "success"}
+        >
+          {submissionStatus === "submitting" ? "Saving Predictions..." : "Submit Predictions"}
         </button>
       </form>
     </main>
