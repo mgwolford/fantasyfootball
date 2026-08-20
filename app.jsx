@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Layout/Navbar";
 import Home from "./pages/Home";  // TODO: Add other pages here
 import ManagerHistory from "./pages/ManagerHistory";
@@ -9,7 +9,7 @@ import "./styles/global.css";  // TODO: Add other styles here
 
 function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <Navbar />
 
       <Routes>
@@ -19,7 +19,7 @@ function App() {
         <Route path="/headtohead" element={<HeadtoHead />} />
         <Route path="/predictions" element={<Predictions />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
