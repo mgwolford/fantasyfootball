@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/predictions.css";
 
 import managers from "../data/managers";
-import { nflTeams, winTotalsSource } from "../data/NFLTeams";
+import {
+  awardOptions,
+  awardOptionsSource,
+  nflTeams,
+  winTotalsSource,
+} from "../data/NFLTeams";
 import { divisions, awardCategories } from "../data/predictionOptions";
 
 function Predictions() {
@@ -26,7 +31,44 @@ function Predictions() {
     nfcChampion: "",
     superBowlWinner: "",
     awards: {},
+    awardSelections: {},
   });
+
+  const afcDivisionWinners = divisions
+    .filter((division) => division.startsWith("AFC"))
+    .map((division) => formData.divisionWinners[division])
+    .filter(Boolean);
+  const nfcDivisionWinners = divisions
+    .filter((division) => division.startsWith("NFC"))
+    .map((division) => formData.divisionWinners[division])
+    .filter(Boolean);
+  const afcPlayoffTeams = [...afcDivisionWinners, ...formData.afcWildCards].filter(Boolean);
+  const nfcPlayoffTeams = [...nfcDivisionWinners, ...formData.nfcWildCards].filter(Boolean);
+
+  useEffect(() => {
+    setFormData((prev) => {
+      const afcChampion = afcPlayoffTeams.includes(prev.afcChampion) ? prev.afcChampion : "";
+      const nfcChampion = nfcPlayoffTeams.includes(prev.nfcChampion) ? prev.nfcChampion : "";
+      const finalists = [afcChampion, nfcChampion].filter(Boolean);
+      const superBowlWinner = finalists.includes(prev.superBowlWinner)
+        ? prev.superBowlWinner
+        : "";
+
+      if (
+        afcChampion === prev.afcChampion
+        && nfcChampion === prev.nfcChampion
+        && superBowlWinner === prev.superBowlWinner
+      ) {
+        return prev;
+      }
+
+      return { ...prev, afcChampion, nfcChampion, superBowlWinner };
+    });
+  }, [
+    formData.divisionWinners,
+    formData.afcWildCards,
+    formData.nfcWildCards,
+  ]);
 
   function updateField(section, key, value) {
     setFormData((prev) => ({
@@ -48,6 +90,39 @@ function Predictions() {
         [conference]: updated,
       };
     });
+  }
+
+  function updateDivisionWinner(division, value) {
+    const conference = division.startsWith("AFC") ? "afcWildCards" : "nfcWildCards";
+
+    setFormData((prev) => ({
+      ...prev,
+      divisionWinners: { ...prev.divisionWinners, [division]: value },
+      [conference]: prev[conference].map((team) => (team === value ? "" : team)),
+    }));
+  }
+
+  function updateAward(award, value) {
+    setFormData((prev) => ({
+      ...prev,
+      awardSelections: { ...prev.awardSelections, [award]: value },
+      awards: {
+        ...prev.awards,
+        [award]: value === "__write_in__" ? "" : value,
+      },
+    }));
+  }
+
+  function getWildCardOptions(conference, index) {
+    const teams = conference === "afcWildCards" ? afcTeams : nfcTeams;
+    const divisionWinners = conference === "afcWildCards"
+      ? afcDivisionWinners
+      : nfcDivisionWinners;
+    const otherWildCards = formData[conference].filter((team, teamIndex) => teamIndex !== index && team);
+
+    return teams.filter(
+      (team) => !divisionWinners.includes(team.name) && !otherWildCards.includes(team.name)
+    );
   }
 
   function renderTeamOptions(teams) {
@@ -92,6 +167,7 @@ function Predictions() {
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({
           ...formData,
+          awardSelections: undefined,
           season: 2026,
           winTotals: Object.fromEntries(
             nflTeams.map((team) => [team.name, {
@@ -209,9 +285,7 @@ function Predictions() {
                   {division}
                   <select
                     value={formData.divisionWinners[division] || ""}
-                    onChange={(e) =>
-                      updateField("divisionWinners", division, e.target.value)
-                    }
+                    onChange={(e) => updateDivisionWinner(division, e.target.value)}
                     required
                   >
                     <option value="">Choose winner</option>
@@ -246,7 +320,7 @@ function Predictions() {
                     required
                   >
                     <option value="">Choose team</option>
-                    {renderTeamOptions(afcTeams)}
+                    {renderTeamOptions(getWildCardOptions("afcWildCards", index))}
                   </select>
                 </label>
               ))}
@@ -266,7 +340,7 @@ function Predictions() {
                     required
                   >
                     <option value="">Choose team</option>
-                    {renderTeamOptions(nfcTeams)}
+                    {renderTeamOptions(getWildCardOptions("nfcWildCards", index))}
                   </select>
                 </label>
               ))}
@@ -276,6 +350,9 @@ function Predictions() {
 
         <section className="prediction-card">
           <h2>Playoff Picks</h2>
+          <p className="section-note">
+            Conference champions can only be selected from your seven playoff teams.
+          </p>
 
           <div className="division-grid">
             <label>
@@ -288,7 +365,9 @@ function Predictions() {
                 required
               >
                 <option value="">Choose team</option>
-                {renderTeamOptions(afcTeams)}
+                {afcPlayoffTeams.map((team) => (
+                  <option key={team} value={team}>{team}</option>
+                ))}
               </select>
             </label>
 
@@ -302,7 +381,9 @@ function Predictions() {
                 required
               >
                 <option value="">Choose team</option>
-                {renderTeamOptions(nfcTeams)}
+                {nfcPlayoffTeams.map((team) => (
+                  <option key={team} value={team}>{team}</option>
+                ))}
               </select>
             </label>
 
@@ -329,21 +410,44 @@ function Predictions() {
 
         <section className="prediction-card">
           <h2>Awards</h2>
+          <p className="odds-source">
+            Top-eight suggestions are based on the latest available odds as of {awardOptionsSource.updated}.
+            You may also choose Write-in Pick.
+          </p>
 
-          <div className="division-grid">
+          <div className="awards-grid">
             {awardCategories.map((award) => (
-              <label key={award}>
-                {award}
-                <input
-                  type="text"
-                  placeholder="Enter player or coach"
-                  value={formData.awards[award] || ""}
-                  onChange={(e) =>
-                    updateField("awards", award, e.target.value)
-                  }
-                  required
-                />
-              </label>
+              <div className="award-pick" key={award}>
+                <label>
+                  {award}
+                  <select
+                    value={formData.awardSelections[award] || ""}
+                    onChange={(e) => updateAward(award, e.target.value)}
+                    required
+                  >
+                    <option value="">Choose a candidate</option>
+                    {(awardOptions[award] || []).map((candidate) => (
+                      <option key={candidate.name} value={candidate.name}>
+                        {candidate.name} — {candidate.odds}
+                      </option>
+                    ))}
+                    <option value="__write_in__">Write-in Pick</option>
+                  </select>
+                </label>
+
+                {formData.awardSelections[award] === "__write_in__" && (
+                  <label className="write-in-field">
+                    Your write-in pick
+                    <input
+                      type="text"
+                      placeholder="Enter player or coach"
+                      value={formData.awards[award] || ""}
+                      onChange={(e) => updateField("awards", award, e.target.value)}
+                      required
+                    />
+                  </label>
+                )}
+              </div>
             ))}
           </div>
         </section>
