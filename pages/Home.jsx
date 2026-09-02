@@ -13,10 +13,10 @@ function Home() {
     <main>
       <Header />
       <DraftCoundown />
-      <DraftOrder />
       <Managers />
       <Keepers />
       <RecordPreview />
+      <DraftOrder />
       <BackToTop />
       <Footer />
 
