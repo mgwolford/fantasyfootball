@@ -85,7 +85,7 @@ export const awardOptions = {
   ],
 
   "Defensive Player of the Year": [
-    { name: "Myles Garrett (Browns)", odds: "+450" },
+    { name: "Myles Garrett (Rams)", odds: "+450" },
     { name: "Will Anderson Jr. (Texans)", odds: "+700" },
     { name: "Aidan Hutchinson (Lions)", odds: "+850" },
     { name: "Maxx Crosby (Raiders)", odds: "+1200" },
